@@ -3,7 +3,11 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 const getAnkete = asyncHandler((req, res) => {
-  async function main() {}
+  let result
+  async function main() {
+    result = await prisma.$queryRaw`SELECT * FROM ankete`
+    res.json(result)
+  }
   main()
     .catch((e) => {
       throw e
@@ -11,7 +15,6 @@ const getAnkete = asyncHandler((req, res) => {
     .finally(async () => {
       await prisma.$disconnect()
     })
-  res.json({ test: 'test' })
 })
 
 module.exports = {
