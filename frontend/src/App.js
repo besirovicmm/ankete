@@ -1,5 +1,11 @@
+import HomeScreen from "./Screen/HomeScreen";
+
 function App() {
-  return <div className="App">tesdt</div>;
+  return (
+    <div className="App">
+      <HomeScreen />
+    </div>
+  );
 }
 
 export default App;
