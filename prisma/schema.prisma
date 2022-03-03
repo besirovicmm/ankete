@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ankete {
+  idAnkete   Int       @id @default(autoincrement())
+  ime_ankete String?   @db.VarChar(250)
+  pitanja    pitanja[]
+}
+
+model korisnici {
+  id_korisnika       Int                  @id @default(autoincrement())
+  ime_korisnika      String?              @db.VarChar(250)
+  odgovori_korisnika odgovori_korisnika[]
+}
+
+model odgovori {
+  id_odgovora        Int                  @id @default(autoincrement())
+  id_pitanja         Int?
+  odgovor            String               @db.Text
+  pitanja            pitanja?             @relation(fields: [id_pitanja], references: [id_pitanja], onDelete: NoAction, onUpdate: NoAction, map: "odgovori_ibfk_1")
+  odgovori_korisnika odgovori_korisnika[]
+
+  @@index([id_pitanja], map: "id_pitanja")
+}
+
+model odgovori_korisnika {
+  id_odg_korisnika Int        @id @default(autoincrement())
+  id_odgovora      Int?
+  id_korisnika     Int?
+  korisnici        korisnici? @relation(fields: [id_korisnika], references: [id_korisnika], onDelete: NoAction, onUpdate: NoAction, map: "odgovori_korisnika_ibfk_2")
+  odgovori         odgovori?  @relation(fields: [id_odgovora], references: [id_odgovora], onDelete: NoAction, onUpdate: NoAction, map: "odgovori_korisnika_ibfk_1")
+
+  @@index([id_korisnika], map: "id_korisnika")
+  @@index([id_odgovora], map: "id_odgovora")
+}
+
+model pitanja {
+  id_pitanja  Int        @id @default(autoincrement())
+  id_ankete   Int?
+  tip_pitanja String     @db.VarChar(255)
+  pitanje     String     @db.Text
+  ankete      ankete?    @relation(fields: [id_ankete], references: [idAnkete], onDelete: NoAction, onUpdate: NoAction, map: "pitanja_ibfk_1")
+  odgovori    odgovori[]
+
+  @@index([id_ankete], map: "id_ankete")
+}
+
+model sales {
+  id             BigInt    @id @unique(map: "id") @default(autoincrement()) @db.UnsignedBigInt
+  date_created   DateTime? @default(dbgenerated("(curdate())")) @db.Date
+  date_fulfilled DateTime? @db.Date
+  customer_name  String    @db.VarChar(300)
+  product_name   String    @db.VarChar(300)
+  volume         Decimal   @db.Decimal(10, 3)
+  is_recurring   Boolean?  @default(false)
+  is_disputed    Boolean?  @default(false)
+}
