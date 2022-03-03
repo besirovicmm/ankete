@@ -1,9 +1,12 @@
 import HomeScreen from "./Screen/HomeScreen";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <HomeScreen />
+    <div>
+      <Routes>
+        <Route path="/" element={<HomeScreen />} />
+      </Routes>
     </div>
   );
 }
