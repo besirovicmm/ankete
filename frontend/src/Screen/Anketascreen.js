@@ -5,7 +5,6 @@ import { uzmiPitanja } from "../REdux/Slices/FetchData";
 
 const Anketascreen = () => {
   const params = useParams();
-  const { id } = params;
   const dispatch = useDispatch();
   const anketeZasebno = useSelector((stanje) => stanje.anketa.anketeZasebno);
 
