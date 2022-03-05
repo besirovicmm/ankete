@@ -8,10 +8,10 @@
       "server": "localhost",
       "port": 3306,
       "driver": "MySQL",
-      "name": "MySQL",
+      "name": "Mysql",
       "database": "anketa",
       "username": "root",
-      "password": "abc123"
+      "password": "belma123"
     }
   ]
 }

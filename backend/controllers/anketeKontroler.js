@@ -1,22 +1,24 @@
-const asyncHandler = require('express-async-handler')
-const { PrismaClient } = require('@prisma/client')
-const prisma = new PrismaClient()
+const asyncHandler = require("express-async-handler");
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 const getAnkete = asyncHandler((req, res) => {
-  let result
+  console.log("hello");
+  let result;
   async function main() {
-    result = await prisma.$queryRaw`SELECT * FROM ankete`
-    res.json(result)
+    result = await prisma.$queryRaw`SELECT * FROM ankete`;
+    console.log(result);
+    res.json(result);
   }
   main()
     .catch((e) => {
-      throw e
+      throw e;
     })
     .finally(async () => {
-      await prisma.$disconnect()
-    })
-})
+      await prisma.$disconnect();
+    });
+});
 
 module.exports = {
   getAnkete,
-}
+};
