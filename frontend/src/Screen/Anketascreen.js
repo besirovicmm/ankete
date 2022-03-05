@@ -25,6 +25,7 @@ const Anketascreen = () => {
   return (
     <div>
       <h1>
+        {/* mozda da u tabeli odgovora dodamo tekstualni odgovor ? */}
         {anketeZasebno &&
           anketeZasebno.map((el) => {
             return (
