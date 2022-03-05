@@ -1,13 +1,22 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { uzmiPitanja } from '../REdux/Slices/FetchData'
 
 const Anketascreen = () => {
   const params = useParams()
+  const [formData, setFormData] = useState()
   const { id } = params
   const dispatch = useDispatch()
   const anketeZasebno = useSelector((stanje) => stanje.anketa.anketeZasebno)
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+    console.log(formData)
+  }
 
   useEffect(() => {
     dispatch(uzmiPitanja(id))
@@ -19,12 +28,21 @@ const Anketascreen = () => {
         {anketeZasebno &&
           anketeZasebno.map((el) => {
             return (
-              <div>
-                <h3>{el.pitanje}</h3>
-                {el.odgovori.map((el) => (
-                  <p>{el}</p>
+              <form>
+                <label>{el.pitanje}</label>
+                {el.odgovori.map((item) => (
+                  <div>
+                    <label>{item}</label>
+                    <input
+                      onChange={onChange}
+                      type="radio"
+                      name={el.pitanje}
+                      value={item}
+                      placeholder={item}
+                    />
+                  </div>
                 ))}
-              </div>
+              </form>
             )
           })}
       </h1>
