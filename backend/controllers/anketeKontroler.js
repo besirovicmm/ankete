@@ -46,6 +46,7 @@ const getPitanja = asyncHandler((req, res) => {
         }
       }
     })
+
     console.log(niz)
     res.json(niz)
   }

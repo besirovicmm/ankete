@@ -11,10 +11,23 @@ const Anketascreen = () => {
 
   useEffect(() => {
     dispatch(uzmiPitanja(id))
+    console.log(anketeZasebno)
   }, [])
   return (
     <div>
-      <h1>Anketa {id}</h1>
+      <h1>
+        {anketeZasebno &&
+          anketeZasebno.map((el) => {
+            return (
+              <div>
+                <h3>{el.pitanje}</h3>
+                {el.odgovori.map((el) => (
+                  <p>{el}</p>
+                ))}
+              </div>
+            )
+          })}
+      </h1>
     </div>
   )
 }
