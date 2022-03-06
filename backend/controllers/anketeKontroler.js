@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler')
 const { PrismaClient } = require('@prisma/client')
-const e = require('express')
 const prisma = new PrismaClient()
 
 const getAnkete = asyncHandler((req, res) => {
@@ -19,6 +18,7 @@ const getAnkete = asyncHandler((req, res) => {
       await prisma.$disconnect()
     })
 })
+
 const ubaciAnketu = asyncHandler((req, res) => {
   let identifikacija = []
   const { formData } = req.body
