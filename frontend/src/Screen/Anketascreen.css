@@ -1,0 +1,27 @@
+.anketa {
+  margin: 30px auto;
+  background-color: rgb(184, 47, 47);
+  width: 90vw;
+  height: 90vh;
+  text-align: center;
+}
+.A {
+  margin: 0px auto;
+
+  width: 80vw;
+  height: 80vh;
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.PiO {
+  border-radius: 15px;
+  border: 3px solid black;
+  padding: 20px 10px;
+  width: 350px;
+  height: 200px;
+  background-color: rgba(157, 157, 161, 0.308);
+  font-size: 20px;
+}

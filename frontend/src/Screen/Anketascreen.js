@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { uzmiPitanja } from '../REdux/Slices/FetchData'
-
+import { uzmiPitanja, posaljiOdgovore } from '../REdux/Slices/FetchData'
+import './Anketascreen.css'
+import axios from 'axios'
 const Anketascreen = () => {
   const params = useParams()
   const { id } = params
   const [formData, setFormData] = useState({ id, odgovor: {} })
+
   const dispatch = useDispatch()
   const anketeZasebno = useSelector((stanje) => stanje.anketa.anketeZasebno)
 
@@ -17,36 +19,52 @@ const Anketascreen = () => {
     }))
     console.log(formData)
   }
+  const posaljiOdgovore = async (formData) => {
+    try {
+      const { data } = await axios.post('/api/ankete', { formData })
+      console.log(data)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const odgovori = () => {
+    posaljiOdgovore(formData)
+  }
 
   useEffect(() => {
     dispatch(uzmiPitanja(id))
     console.log(anketeZasebno)
   }, [])
   return (
-    <div>
+    <div className="anketa">
       <h1>
-        {/* mozda da u tabeli odgovora dodamo tekstualni odgovor ? */}
-        {anketeZasebno &&
-          anketeZasebno.map((el) => {
-            return (
-              <form>
-                <label>{el.pitanje}</label>
-                {el.odgovori.map((item) => (
-                  <div>
-                    <label>{item}</label>
-                    <input
-                      onChange={onChange}
-                      type="radio"
-                      name={el.pitanje}
-                      value={item}
-                      placeholder={item}
-                    />
-                  </div>
-                ))}
-              </form>
-            )
-          })}
+        <div className="A">
+          {/* mozda da u tabeli odgovora dodamo tekstualni odgovor ? */}
+          {anketeZasebno &&
+            anketeZasebno.map((el) => {
+              return (
+                <div className="PiO">
+                  <form>
+                    <label>{el.pitanje}</label> <br /> <br />
+                    {el.odgovori.map((item) => (
+                      <div className="">
+                        {item}
+                        <input
+                          type="radio"
+                          value={item}
+                          name={el.pitanje}
+                          onChange={onChange}
+                        />
+                      </div>
+                    ))}
+                  </form>
+                </div>
+              )
+            })}
+        </div>
       </h1>
+      <button onClick={odgovori}>odgovori</button>
     </div>
   )
 }
