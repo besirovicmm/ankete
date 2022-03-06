@@ -5,15 +5,15 @@ import { uzmiPitanja } from '../REdux/Slices/FetchData'
 
 const Anketascreen = () => {
   const params = useParams()
-  const [formData, setFormData] = useState()
   const { id } = params
+  const [formData, setFormData] = useState({ id, odgovor: {} })
   const dispatch = useDispatch()
   const anketeZasebno = useSelector((stanje) => stanje.anketa.anketeZasebno)
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      [e.target.name]: e.target.value,
+      odgovor: { ...prevState.odgovor, [e.target.name]: e.target.value },
     }))
     console.log(formData)
   }
