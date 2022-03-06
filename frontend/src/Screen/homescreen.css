@@ -1,17 +1,20 @@
 body {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+  background-color: rgb(12, 12, 12);
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 .mapirajAnkete {
+  padding: 0px;
+  margin: 0px;
   display: flex;
+  align-content: center;
   justify-content: space-evenly;
   flex-direction: column;
   flex-wrap: wrap;
-  background-color: rgb(84, 104, 81);
+  /* background-color: rgb(65, 64, 64); */
   width: 80vw;
-  height: 40vh;
+  height: 50vh;
 }

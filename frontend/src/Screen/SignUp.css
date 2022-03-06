@@ -1,0 +1,38 @@
+.registracija {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(12, 12, 12, 0.452);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reg input {
+  display: block;
+  color: wheat;
+  background-color: grey;
+  padding: 5px 20px;
+  border: none;
+  background: none;
+  border-bottom: 2px solid greenyellow;
+  font-size: 20px;
+}
+.reg label {
+  font-size: 25px;
+  color: rgb(75, 75, 75);
+}
+.reg input:hover {
+  border: 2px solid greenyellow;
+}
+.reg button {
+  margin-top: 10px;
+  width: 150px;
+  padding: 8px;
+  border-radius: 15px;
+  border: 2px solid black;
+  font-size: 18px;
+  background-color: grey;
+}
+.reg button:hover {
+  border: 1px solid gold;
+  background-color: rgba(0, 0, 0, 0.322);
+}

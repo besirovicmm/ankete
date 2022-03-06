@@ -6,14 +6,17 @@ import { getAnkete } from "../REdux/Slices/FetchData";
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const { ankete } = useSelector((state) => state.anketa);
-
+  const proba = [{ ime: "a" }, { ime: "b" }, { ime: "c" }];
   useEffect(() => {
     dispatch(getAnkete());
     console.log(ankete, "hello");
   }, []);
   return (
-    <div>
-      <h1>Dobrodosli! Molimo Vas izaberite jednu od anketa</h1>
+    <div className="">
+      <h1>
+        Dobrodosli! <br />
+        <br /> Molimo Vas izaberite jednu od anketa
+      </h1>
 
       <div className="mapirajAnkete">
         {ankete.map((el) => {
