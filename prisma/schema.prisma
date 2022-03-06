@@ -16,6 +16,10 @@ model ankete {
 model korisnici {
   id_korisnika       Int                  @id @default(autoincrement())
   ime_korisnika      String?              @db.VarChar(250)
+  prezime            String?              @db.VarChar(255)
+  password           String?              @db.VarChar(255)
+  is_admin           Boolean?             @default(false)
+  email              String?              @unique(map: "email") @db.VarChar(255)
   odgovori_korisnika odgovori_korisnika[]
 }
 
