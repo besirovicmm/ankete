@@ -1,6 +1,6 @@
 .anketa {
   margin: 30px auto;
-  background-color: rgb(184, 47, 47);
+  background-color: rgb(37, 37, 37);
   width: 90vw;
   height: 90vh;
   text-align: center;
@@ -24,4 +24,17 @@
   height: 200px;
   background-color: rgba(157, 157, 161, 0.308);
   font-size: 20px;
+}
+.anketa button {
+  width: 150px;
+  padding: 8px;
+  border-radius: 15px;
+  border: 2px solid black;
+  font-size: 18px;
+  background-color: grey;
+}
+.anketa button:hover {
+  border: 1px solid gold;
+  background-color: rgba(0, 0, 0, 0.322);
+  color: white;
 }
