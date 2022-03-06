@@ -20,16 +20,9 @@ const getAnkete = asyncHandler((req, res) => {
     })
 })
 const ubaciAnketu = asyncHandler((req, res) => {
-  const nesto = {}
-  let test = {
-    id: 1,
-    odgovor: {
-      'Koja boja vam je omiljena': 'CRNA',
-      'Kako ocenjujete nasu upornost??': 'Lose',
-    },
-  }
   let identifikacija = []
-  const { id, odgovor } = test
+  const { formData } = req.body
+  const { id, odgovor } = formData
 
   async function main() {
     result = await prisma.$queryRaw`SELECT p.pitanje,o.odgovor,o.id_odgovora
@@ -38,7 +31,7 @@ const ubaciAnketu = asyncHandler((req, res) => {
     INNER JOIN odgovori AS o ON o.id_pitanja =p.id_pitanja
     WHERE a.iDankete=${id}`
 
-    async function x(id_odg) {
+    async function insert(id_odg) {
       await prisma.$queryRaw`INSERT INTO odgovori_korisnika(id_odgovora,id_korisnika)
       VALUES (${id_odg},2)`
     }
@@ -49,10 +42,9 @@ const ubaciAnketu = asyncHandler((req, res) => {
       }
     })
     identifikacija.forEach((id_odg) => {
-      x(id_odg)
+      insert(id_odg)
     })
-    res.json(nesto)
-    console.log(identifikacija)
+    res.json(odgovor)
   }
   main()
     .catch((e) => {
