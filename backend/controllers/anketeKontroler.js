@@ -93,8 +93,33 @@ const getPitanja = asyncHandler((req, res) => {
       await prisma.$disconnect()
     })
 })
+const getAnketeKorisnika = asyncHandler((req, res) => {
+  const { id_ank, id_kor } = req.body
+  console.log(req.body)
+
+  async function main() {
+    result = await prisma.$queryRaw`SELECT p.pitanje,o.odgovor
+    FROM ankete AS a
+    INNER JOIN pitanja AS p ON a.idAnkete = p.id_ankete
+    INNER JOIN odgovori AS o ON o.id_pitanja =p.id_pitanja
+    INNER JOIN odgovori_korisnika AS odg ON o.id_odgovora=odg.id_odgovora
+    INNER JOIN korisnici AS kor ON odg.id_korisnika=kor.id_korisnika
+    WHERE kor.id_korisnika=12 && a.idAnkete=2`
+
+    res.json(result)
+    console.log(result, 'ANKETA')
+  }
+  main()
+    .catch((e) => {
+      throw e
+    })
+    .finally(async () => {
+      await prisma.$disconnect()
+    })
+})
 
 module.exports = {
+  getAnketeKorisnika,
   getAnkete,
   getPitanja,
   ubaciAnketu,
