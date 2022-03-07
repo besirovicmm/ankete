@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { uzmiSveAnketeKorisnika } from '../REdux/Slices/FetchData'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { uzmiSveAnketeKorisnika } from "../REdux/Slices/FetchData";
 
 const AnketeKorisnika = () => {
-  const dispatch = useDispatch()
-  const { anketeKorisnika } = useSelector((state) => state.anketa)
+  const dispatch = useDispatch();
+  const { anketeKorisnika } = useSelector((state) => state.anketa);
 
   useEffect(() => {
-    dispatch(uzmiSveAnketeKorisnika(2, 12))
-    console.log(anketeKorisnika)
-  }, [])
+    dispatch(uzmiSveAnketeKorisnika(2, 12));
+    console.log(anketeKorisnika);
+  }, []);
 
   return (
     <div>
@@ -20,10 +20,10 @@ const AnketeKorisnika = () => {
               <p>{el.pitanje}</p>
               <p>{el.odgovor}</p>
             </div>
-          )
+          );
         })}
     </div>
-  )
-}
+  );
+};
 
-export default AnketeKorisnika
+export default AnketeKorisnika;

@@ -1,0 +1,30 @@
+.navigacioniMeni {
+  /* background-color: red; */
+}
+.navigacioniMeni ul {
+  margin: 20px auto;
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+.navigacioniMeni ul :link:hover {
+  width: 130px;
+  font-size: 20px;
+  color: greenyellow;
+}
+
+.navigacioniMeni ul :link {
+  width: 100px;
+  text-align: center;
+  padding: 5px 12px;
+  font-size: 18px;
+  /* background-color: grey; */
+  /* border-radius: 15px; */
+  border-bottom: 2px solid greenyellow;
+  transition: 0.5s;
+}
+.navigacioniMeni ul link:hover {
+  cursor: pointer;
+}
