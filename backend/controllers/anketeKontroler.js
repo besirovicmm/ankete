@@ -95,7 +95,7 @@ const getPitanja = asyncHandler((req, res) => {
 })
 const getAnketeKorisnika = asyncHandler((req, res) => {
   const { id_ank, id_kor } = req.body
-  console.log(req.body)
+  console.log(req.body, 'req-body')
 
   async function main() {
     result = await prisma.$queryRaw`SELECT p.pitanje,o.odgovor
@@ -104,7 +104,31 @@ const getAnketeKorisnika = asyncHandler((req, res) => {
     INNER JOIN odgovori AS o ON o.id_pitanja =p.id_pitanja
     INNER JOIN odgovori_korisnika AS odg ON o.id_odgovora=odg.id_odgovora
     INNER JOIN korisnici AS kor ON odg.id_korisnika=kor.id_korisnika
-    WHERE kor.id_korisnika=12 && a.idAnkete=2`
+    WHERE kor.id_korisnika=${id_kor} && a.idAnkete=${id_ank}`
+
+    res.json(result)
+    console.log(result, 'ANKETA')
+  }
+  main()
+    .catch((e) => {
+      throw e
+    })
+    .finally(async () => {
+      await prisma.$disconnect()
+    })
+})
+const getSveAnketeKorisnika = asyncHandler((req, res) => {
+  const { id_kor } = req.body
+  console.log(req.body, 'req-bAAAody')
+
+  async function main() {
+    result = await prisma.$queryRaw`SELECT DISTINCT a.idAnkete,a.ime_ankete
+    FROM ankete AS a
+    LEFT JOIN pitanja AS p ON a.idAnkete = p.id_ankete
+    LEFT JOIN odgovori AS o ON o.id_pitanja =p.id_pitanja
+    LEFT JOIN odgovori_korisnika AS odg ON o.id_odgovora=odg.id_odgovora
+    LEFT JOIN korisnici AS kor ON odg.id_korisnika=kor.id_korisnika
+    WHERE kor.id_korisnika=${id_kor}`
 
     res.json(result)
     console.log(result, 'ANKETA')
@@ -122,5 +146,6 @@ module.exports = {
   getAnketeKorisnika,
   getAnkete,
   getPitanja,
+  getSveAnketeKorisnika,
   ubaciAnketu,
 }

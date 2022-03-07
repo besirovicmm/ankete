@@ -77,11 +77,27 @@ const ulogujKorisnika = asyncHandler(async (req, res) => {
     throw new Error('Nije validno nesto')
   }
 })
+const getKorisnike = asyncHandler(async (req, res) => {
+  const users = await prisma.korisnici.findMany({
+    select: {
+      id_korisnika: true,
+      ime_korisnika: true,
+    },
+  })
+
+  if (users) {
+    res.json(users)
+  } else {
+    res.status(400)
+    throw new Error('Nije validno nesto')
+  }
+})
 const napraviToken = (id) => {
   return jwt.sign({ id }, 'tajna123', { expiresIn: '30d' })
 }
 
 module.exports = {
   registrujKorisnika,
+  getKorisnike,
   ulogujKorisnika,
 }

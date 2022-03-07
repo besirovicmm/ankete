@@ -1,44 +1,57 @@
-import React from "react";
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import React from 'react'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 const initialState = {
   registracija: [],
   login: [],
-};
+  korisnici: [],
+}
 export const prijaviKorisnika = createAsyncThunk(
-  "registracija korisnika",
+  'registracija korisnika',
   async (input) => {
     try {
-      console.log("fetc");
-      const { data } = await axios.post("/api/korisnici", { input });
-      console.log(data);
+      console.log('fetc')
+      const { data } = await axios.post('/api/korisnici', { input })
+      console.log(data)
 
       if (data) {
-        JSON.stringify(localStorage.setItem("user", data)); // ubacili smo datu u localstorage
+        JSON.stringify(localStorage.setItem('user', data)) // ubacili smo datu u localstorage
       }
-      return data;
+      return data
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
-);
+)
 export const loginKorisnika = createAsyncThunk(
-  "ulogovanje korisnika",
+  'ulogovanje korisnika',
   async (input) => {
     try {
-      console.log("fetc");
-      const { data } = await axios.post("/api/korisnici/login", { input });
-      console.log(data);
+      console.log('fetc')
+      const { data } = await axios.post('/api/korisnici/login', { input })
+      console.log(data)
       if (data) {
-        JSON.stringify(localStorage.setItem("user", data)); // ubacili smo datu u localstorage
+        JSON.stringify(localStorage.setItem('user', data)) // ubacili smo datu u localstorage
       }
-      return data;
+      return data
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
-);
+)
+export const uzmiKorisnike = createAsyncThunk(
+  'uzmi korisnike sve ',
+  async (id) => {
+    try {
+      const { data } = await axios.get('/api/korisnici/')
+      console.log(data)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+)
 
 // export const authorization = createAsyncThunk("proveri token", async () => {
 //   try {
@@ -57,18 +70,22 @@ export const loginKorisnika = createAsyncThunk(
 // });
 
 export const Sign = createSlice({
-  name: "prijavljivanje korisnika",
+  name: 'prijavljivanje korisnika',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(prijaviKorisnika.pending, (state) => {});
+    builder.addCase(uzmiKorisnike.pending, (state) => {})
+    builder.addCase(uzmiKorisnike.fulfilled, (state, { payload }) => {
+      state.korisnici = payload
+    })
+    builder.addCase(prijaviKorisnika.pending, (state) => {})
     builder.addCase(prijaviKorisnika.fulfilled, (state, { payload }) => {
-      state.registracija.push(payload);
-    });
+      state.registracija.push(payload)
+    })
     builder.addCase(loginKorisnika.fulfilled, (state, { payload }) => {
-      state.login.push(payload);
-    });
+      state.login.push(payload)
+    })
   },
-});
+})
 
-export default Sign.reducer;
+export default Sign.reducer

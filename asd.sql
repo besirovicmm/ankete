@@ -54,13 +54,13 @@
 -- (4,'Macke')
 
 
-SELECT p.pitanje,o.odgovor
-    FROM ankete AS a
-    INNER JOIN pitanja AS p ON a.idAnkete = p.id_ankete
-    INNER JOIN odgovori AS o ON o.id_pitanja =p.id_pitanja
-    INNER JOIN odgovori_korisnika AS odg ON o.id_odgovora=odg.id_odgovora
-    INNER JOIN korisnici AS kor ON odg.id_korisnika=kor.id_korisnika
-    WHERE kor.id_korisnika=12 && a.idAnkete=1
+-- SELECT p.pitanje,o.odgovor
+--     FROM ankete AS a
+--     INNER JOIN pitanja AS p ON a.idAnkete = p.id_ankete
+--     INNER JOIN odgovori AS o ON o.id_pitanja =p.id_pitanja
+--     INNER JOIN odgovori_korisnika AS odg ON o.id_odgovora=odg.id_odgovora
+--     INNER JOIN korisnici AS kor ON odg.id_korisnika=kor.id_korisnika
+--     WHERE kor.id_korisnika=12 && a.idAnkete=1
 
 
 -- INSERT INTO odgovori_korisnika(id_odgovora,id_korisnika)
@@ -69,3 +69,21 @@ SELECT p.pitanje,o.odgovor
 -- (5,12)
 
 -- DELETE FROM odgovori_korisnika WHERE id_korisnika=12
+
+
+-- SELECT DISTINCT a.idAnkete,a.ime_ankete
+--     FROM ankete AS a
+--     LEFT JOIN pitanja AS p ON a.idAnkete = p.id_ankete
+--     LEFT JOIN odgovori AS o ON o.id_pitanja =p.id_pitanja
+--     LEFT JOIN odgovori_korisnika AS odg ON o.id_odgovora=odg.id_odgovora
+--     LEFT JOIN korisnici AS kor ON odg.id_korisnika=kor.id_korisnika
+--     WHERE kor.id_korisnika=12
+
+
+SELECT p.pitanje,o.odgovor
+    FROM ankete AS a
+    INNER JOIN pitanja AS p ON a.idAnkete = p.id_ankete
+    INNER JOIN odgovori AS o ON o.id_pitanja =p.id_pitanja
+    INNER JOIN odgovori_korisnika AS odg ON o.id_odgovora=odg.id_odgovora
+    INNER JOIN korisnici AS kor ON odg.id_korisnika=kor.id_korisnika
+    WHERE kor.id_korisnika=11 && a.idAnkete=2

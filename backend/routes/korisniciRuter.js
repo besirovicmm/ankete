@@ -6,9 +6,10 @@ const router = express.Router()
 const {
   registrujKorisnika,
   ulogujKorisnika,
+  getKorisnike,
 } = require('../controllers/korisniciKontroler')
 
-router.route('/').post(registrujKorisnika)
+router.route('/').post(registrujKorisnika).get(getKorisnike)
 router.route('/login').post(ulogujKorisnika)
 
 module.exports = router

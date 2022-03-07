@@ -6,6 +6,7 @@ const initialState = {
   ankete: [],
   anketeZasebno: [],
   anketeKorisnika: [],
+  sveAnketeKorisnika: [],
 }
 export const getAnkete = createAsyncThunk('Neki String', async () => {
   try {
@@ -31,16 +32,32 @@ export const uzmiPitanja = createAsyncThunk(
     }
   }
 )
+
 export const uzmiSveAnketeKorisnika = createAsyncThunk(
   'uzmi sve ANKETE sa odgovorima korisnika preko ID',
-  async (id_kor, id_ank) => {
+  async ({ id_ank, id_kor }) => {
     try {
       console.log('fetc')
       const { data } = await axios.post('/api/ankete/korisnik', {
         id_ank,
         id_kor,
       })
-      console.log(data, 'ANKETE KOR')
+      console.log(data, '111')
+      return data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+)
+export const uzmiSveAnketeKorisnikaBezIdAnkete = createAsyncThunk(
+  'uzmi sve ANKETE sa odgovorima korisnika ',
+  async (id_kor) => {
+    try {
+      console.log('fetc')
+      const { data } = await axios.post('/api/ankete/sveanketekorisnika', {
+        id_kor,
+      })
+      console.log(data, '111')
       return data
     } catch (error) {
       console.log(error)
@@ -54,10 +71,18 @@ export const fetchData = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(uzmiSveAnketeKorisnika.pending, (state) => {})
+
     builder.addCase(uzmiSveAnketeKorisnika.fulfilled, (state, { payload }) => {
       console.log(payload)
       state.anketeKorisnika = payload
     })
+    builder.addCase(
+      uzmiSveAnketeKorisnikaBezIdAnkete.fulfilled,
+      (state, { payload }) => {
+        console.log(payload)
+        state.sveAnketeKorisnika = payload
+      }
+    )
     builder.addCase(getAnkete.pending, (state) => {})
     builder.addCase(getAnkete.fulfilled, (state, { payload }) => {
       state.ankete = payload
