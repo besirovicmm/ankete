@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginKorisnika } from "../REdux/Slices/Sign";
-import "./Login.css";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -36,7 +35,7 @@ const Login = () => {
           onChange={promena}
         ></input>
         <br />
-        <button onClick={posalji}>posalji</button>
+        <button onClick={posalji}>uloguj se</button>
       </div>
     </div>
   );

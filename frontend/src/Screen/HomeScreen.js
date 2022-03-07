@@ -12,9 +12,8 @@ const HomeScreen = () => {
     console.log(ankete, "hello");
   }, []);
   return (
-    <div className="">
+    <div className="glavni">
       <h1>
-        Dobrodosli! <br />
         <br /> Molimo Vas izaberite jednu od anketa
       </h1>
 

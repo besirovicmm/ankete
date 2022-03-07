@@ -2,14 +2,14 @@
   margin: 30px auto;
   background-color: rgb(37, 37, 37);
   width: 90vw;
-  height: 90vh;
+  height: 80vh;
   text-align: center;
 }
 .A {
   margin: 0px auto;
 
   width: 80vw;
-  height: 80vh;
+  height: 70vh;
   display: flex;
   align-content: center;
   justify-content: space-evenly;
@@ -37,4 +37,5 @@
   border: 1px solid gold;
   background-color: rgba(0, 0, 0, 0.322);
   color: white;
+  cursor: pointer;
 }
