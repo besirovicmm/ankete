@@ -22,7 +22,7 @@ const getAnkete = asyncHandler((req, res) => {
 const ubaciAnketu = asyncHandler((req, res) => {
   let identifikacija = []
   const { formData } = req.body
-  const { id, odgovor } = formData
+  const { id, odgovor, id_kor } = formData
 
   async function main() {
     result = await prisma.$queryRaw`SELECT p.pitanje,o.odgovor,o.id_odgovora
@@ -33,7 +33,7 @@ const ubaciAnketu = asyncHandler((req, res) => {
 
     async function insert(id_odg) {
       await prisma.$queryRaw`INSERT INTO odgovori_korisnika(id_odgovora,id_korisnika)
-      VALUES (${id_odg},2)`
+      VALUES (${id_odg},${id_kor})`
     }
 
     result.map((el) => {

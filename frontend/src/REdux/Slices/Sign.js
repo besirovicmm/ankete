@@ -9,14 +9,19 @@ const initialState = {
 }
 export const prijaviKorisnika = createAsyncThunk(
   'registracija korisnika',
-  async (input) => {
+  async ({ ime_korisnika, email, password, prezime }) => {
     try {
       console.log('fetc')
-      const { data } = await axios.post('/api/korisnici', { input })
+      const { data } = await axios.post('/api/korisnici', {
+        ime_korisnika,
+        email,
+        password,
+        prezime,
+      })
       console.log(data)
 
       if (data) {
-        JSON.stringify(localStorage.setItem('user', data)) // ubacili smo datu u localstorage
+        localStorage.setItem('user', JSON.stringify(data)) // ubacili smo datu u localstorage
       }
       return data
     } catch (error) {
@@ -26,13 +31,17 @@ export const prijaviKorisnika = createAsyncThunk(
 )
 export const loginKorisnika = createAsyncThunk(
   'ulogovanje korisnika',
-  async (input) => {
+  // async (formData) => {
+  async ({ email, password }) => {
     try {
       console.log('fetc')
-      const { data } = await axios.post('/api/korisnici/login', { input })
+      const { data } = await axios.post('/api/korisnici/login', {
+        email,
+        password,
+      })
       console.log(data)
       if (data) {
-        JSON.stringify(localStorage.setItem('user', data)) // ubacili smo datu u localstorage
+        localStorage.setItem('user', JSON.stringify(data)) // ubacili smo datu u localstorage
       }
       return data
     } catch (error) {

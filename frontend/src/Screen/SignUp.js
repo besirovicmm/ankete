@@ -1,31 +1,36 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { prijaviKorisnika } from "../REdux/Slices/Sign";
-import "./SignUp.css";
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { prijaviKorisnika } from '../REdux/Slices/Sign'
+import './SignUp.css'
 
 const SignUp = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [input, setInput] = useState({
-    ime: "",
-    prezime: "",
-    email: "",
-    password: "",
-  });
+    ime_korisnika: '',
+    prezime: '',
+    email: '',
+    password: '',
+  })
   const onChange = (e) => {
     setInput((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
   const registruj = () => {
-    dispatch(prijaviKorisnika(input));
-  };
+    dispatch(prijaviKorisnika(input))
+  }
   return (
     <div className="registracija">
       <div className="reg">
         <h1>Sign Up</h1>
         <label>Ime</label>
-        <input type="text" name="ime" onChange={onChange} value={input.ime} />
+        <input
+          type="text"
+          name="ime_korisnika"
+          onChange={onChange}
+          value={input.ime}
+        />
         <br />
         <label>Prezime</label>
         <input
@@ -54,7 +59,7 @@ const SignUp = () => {
         <button onClick={registruj}>prijavi se</button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp

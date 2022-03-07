@@ -57,7 +57,7 @@ const registrujKorisnika = asyncHandler(async (req, res) => {
 
 const ulogujKorisnika = asyncHandler(async (req, res) => {
   const { email, password } = req.body
-
+  console.log(req.body)
   const korisnik = await prisma.korisnici.findUnique({
     where: { email },
   })
